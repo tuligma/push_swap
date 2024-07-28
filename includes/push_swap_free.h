@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   push_swap_free.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 03:10:15 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 06:13:09 by npentini         ###   ########.fr       */
+/*   Created: 2024/07/28 04:53:30 by npentini          #+#    #+#             */
+/*   Updated: 2024/07/28 05:47:44 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap_lib.h"
+#ifndef PUSH_SWAP_FREE_H
+# define PUSH_SWAP_FREE_H
 
-int     ft_isdigit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
+void	free_int_array(int **array);
+void	free_array(char ***arr, int x);
+void	free_data_11(t_ps_hub **data, int x);
+int		free_data(t_ps_hub **data, int which_to_free, int x);
+void	free_data_0(t_ps_hub **data, int x);
+
+#endif

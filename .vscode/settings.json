@@ -2,6 +2,10 @@
 	"files.associations": {
 		"push_swap.h": "c",
 		"push_swap_lib.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"array": "cpp",
+		"string": "cpp",
+		"string_view": "cpp",
+		"ft_printf.h": "c"
 	}
 }

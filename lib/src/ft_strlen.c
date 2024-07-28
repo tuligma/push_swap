@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 03:10:15 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 06:13:09 by npentini         ###   ########.fr       */
+/*   Created: 2024/07/28 03:07:58 by npentini          #+#    #+#             */
+/*   Updated: 2024/07/28 03:08:24 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap_lib.h"
 
-int     ft_isdigit(char c)
+size_t	ft_strlen(const char *s)
 {
-	return (c >= '0' && c <= '9');
+	size_t	x;
+
+	x = 0;
+	while (s[x])
+		x++;
+	return (x);
 }

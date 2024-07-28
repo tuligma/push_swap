@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   push_swap_init.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 03:10:15 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 06:13:09 by npentini         ###   ########.fr       */
+/*   Created: 2024/07/28 04:50:51 by npentini          #+#    #+#             */
+/*   Updated: 2024/07/28 05:10:48 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap_lib.h"
+#ifndef PUSH_SWAP_INIT_H
+# define PUSH_SWAP_INIT_H
 
-int     ft_isdigit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
+int			struct_init(void **struct_ptr, size_t struct_size);
+int			argument_counter(t_ps_hub *data ,char **args);
+int			argument_strip(t_ps_hub *data, char **args);
+int			argument_extraction(t_ps_hub *data, int argc, char **argv, int (*f)(t_ps_hub*, char **));
+t_ps_hub	*init_handler(int argc, char *argv[]);
+
+#endif
