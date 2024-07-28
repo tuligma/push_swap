@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_error_ext.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 00:43:57 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 02:45:10 by npentini         ###   ########.fr       */
+/*   Created: 2024/07/29 02:42:27 by npentini          #+#    #+#             */
+/*   Updated: 2024/07/29 02:45:28 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-int	main(int argc, char *argv[])
+int	dup_checker(t_ps_hub *data)
 {
-	t_ps_hub *data;
-	
-	if (error_checker(argc, argv) == 1)
-		return (1);
-	data = init_handler(argc, argv);
-	if (data == NULL)
-		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-	if (dup_checker(data) != 0 || sort_checker(data) != 0)
-		return (free_data(&data, 0, -1));
-	int x;
-	x = -1;
-	while (++x < data->arg_count)
-		ft_printf("arg%d: %d\n", x + 1, (data)->args[x]);
-	ft_printf("Success!!\n");
-	free_data(&data, 0, -1);
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < data->arg_count - 1)
+	{
+		x = y;
+		while (++x < data->arg_count)
+		{
+			if (data->args[y] == data->args[x])
+				return (error_print(EPSDUP, EMSG_EPSDUP, NULL));
+		}
+	}
 	return (0);
+}
+
+int	sort_checker(t_ps_hub *data)
+{
+	int	x;
+
+	x = -1;
+	while(++x < data->arg_count - 1)
+	{
+		if (data->args[x] > data->args[x + 1])
+			return (0);
+	}
+	return (error_print(EPSSRT, EMSG_EPSSRT, NULL));
 }

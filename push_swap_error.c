@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:31:17 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 15:21:49 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/29 02:43:11 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,6 @@ int	error_checker(int argc, char *argv[])
 			return (1);
 		if (is_valid_number(argv[x]) != 0)
 			return (1);
-	}
-	return (0);
-}
-
-int	duplicate_checker(int *args, int len)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < len - 1)
-	{
-		x = y;
-		while (++x < len)
-		{
-			if (args[y] == args[x])
-				return (error_print(EPSDUP, EMSG_EPSDUP, NULL));
-		}
 	}
 	return (0);
 }

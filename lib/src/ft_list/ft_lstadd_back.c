@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_error.h                                  :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 00:29:57 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 02:44:55 by npentini         ###   ########.fr       */
+/*   Created: 2023/06/06 00:04:42 by npentini          #+#    #+#             */
+/*   Updated: 2024/07/07 18:35:28 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_ERROR_H
-# define PUSH_SWAP_ERROR_H
+#include "../includes/libft.h"
 
-int	dup_checker(t_ps_hub *data);
-int	sort_checker(t_ps_hub *data);
-int	error_print(int error_code, char *error_message, char ***arr);
-int	other_element_checker(char *str, int (*fsign)(char), int (*fdigit)(char));
-int	is_valid_number(char *str);
-int	error_checker(int argc, char *argv[]);
+void	ft_lstadd_back(t_list **list, t_list *new)
+{
+	t_list	*last_node;
 
-#endif
+	if (!list || !new)
+		return ;
+	else if (!*list)
+	{
+		*list = new;
+		return ;
+	}
+	last_node = ft_lstlast(*list);
+	last_node->next = new;
+}

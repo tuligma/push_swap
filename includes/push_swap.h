@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:44:08 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 05:36:21 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/29 03:29:22 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,33 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "../lib/src/ft_printf/includes/ft_printf.h"
-# include "../lib/includes/push_swap_lib.h"
+# include "../libft/includes/libft.h"
 
-typedef struct s_ps_sa
+typedef struct s_ps_node
 {
 	int	*data;
 	struct s_ps_sa *next;
 	struct s_ps_sa *prev;
-}	t_ps_sa;
+}	t_ps_node;
 
-typedef struct s_ps_sb
+typedef struct s_ps_stack
 {
-	int	*data;
-	struct s_ps_sb *next;
-	struct s_ps_sb *prev;
-}	t_ps_sb;
+	t_ps_node	*head;
+	t_ps_node	*tail;
+	int			min;
+	int			median;
+	int			max;
+	int			size;
+}	t_ps_stack;
 
 typedef struct s_ps_hub
 {
+	t_ps_stack *a;
+	t_ps_stack *b;
 	int *args;
 	int	arg_count;
 	int	i;
-	t_ps_sa *sa;
-	t_ps_sb *sb;
+	int	sorted;
 }	t_ps_hub;
 
 # include "push_swap_error_codes.h"

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 03:00:05 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 15:23:31 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/29 02:15:53 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define EPSMAL 1003 // Memory allocation fails.
 # define EPSALM 1004 // Argument is more than int limits
 # define EPSDUP 1005 // Argument has duplicates.
+# define EPSSRT 1006 // Argument is sorted.
 
 
 // error messages
@@ -27,5 +28,6 @@
 # define EMSG_EPSMAL "Memory allocation fails!!!"
 # define EMSG_EPSALM "Arguments are greater/less than INT limit!!!"
 # define EMSG_EPSDUP "Arguments has a duplicate numbers!!!"
+# define EMSG_EPSSRT "Argument is already sorted 😉!"
 
 #endif

@@ -6,69 +6,65 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 03:28:58 by npentini          #+#    #+#              #
-#    Updated: 2024/07/28 14:40:51 by npentini         ###   ########.fr        #
+#    Updated: 2024/07/29 03:53:44 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRCS = push_swap.c push_swap_error.c push_swap_free.c push_swap_init.c
-LIB_SRCS = lib/src/ft_bzero.c \
-			lib/src/ft_calloc.c \
-			lib/src/ft_isdigit.c \
-			lib/src/ft_issign.c \
-			lib/src/ft_isspace.c \
-			lib/src/ft_split.c \
-			lib/src/ft_atol.c \
-			lib/src/ft_strdup.c \
-			lib/src/ft_strlen.c
+SRCS = push_swap.c push_swap_error.c push_swap_error_ext.c push_swap_free.c push_swap_init.c 
 COMP = cc
 CFLAGS = -Wall -Wextra -Werror
 DELETE = rm -rf
 OBJ_DIR = objects
-FT_PRINTF_DIR = ./lib/src/ft_printf
-FT_PRINTF_FILE = $(FT_PRINTF_DIR)/libftprintf.a
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
-LIB_OBJS = $(LIB_SRCS:lib/src/%.c=$(OBJ_DIR)/%.o)
+
 
 all: all_done
+
+$(LIBFT):
+	@make -C $(FT_PRINTF_DIR) -s
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(COMP) $(CFLAGS) -o $@ -c $< -g
 
-$(OBJ_DIR)/%.o: lib/src/%.c
-	@mkdir -p $(@D)
-	@$(COMP) $(CFLAGS) -o $@ -c $< -g
+$(NAME) : $(OBJS) $(LIBFT)
+	@$(COMP) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME);
 
-$(FT_PRINTF_FILE):
-	@make -C $(FT_PRINTF_DIR) -s
-
-$(NAME) : $(OBJS) $(LIB_OBJS) $(FT_PRINTF_FILE)
-	@$(COMP) $(CFLAGS) $(OBJS) $(LIB_OBJS) $(FT_PRINTF_FILE) -o $(NAME);
-
-all_done: $(OBJS) $(LIB_OBJS) $(FT_PRINTF_FILE) $(NAME)
-	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
-	@echo "☑️   Object compilation completed!"
-	@echo "✅  Objects has been generated!"
+all_done: $(OBJS) $(LIBFT) $(NAME)
 	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
 	@echo "☑️   Library compilation completed!"
 	@echo "✅  Library objects has been generated!"
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
+	@echo "☑️   Program objects compilation completed!"
+	@echo "✅  Program objects has been generated!"
 	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
 	@echo "☑️   Linking compilation completed!"
 	@echo "✅  🇵🇺🇸🇭_🇸🇼🇦🇵 binary has been generated! "
 	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"
 
 clean:
+	@make -C $(LIBFT_DIR) clean -s > /dev/null 2>&1
 	@$(DELETE) $(OBJ_DIR)
-	@make -C $(FT_PRINTF_DIR) clean -s
-	@echo "\n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
-	@echo "✅  Objects has been deleted."
+
+clean_msg : clean
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
+	@echo "✅  Library objects has been deleted."
+	@echo "✅  Program Objects has been deleted."
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"
 
 fclean: clean
+	@make -C $(LIBFT_DIR) fclean -s > /dev/null 2>&1
 	@$(DELETE) $(NAME)
-	@make -C $(FT_PRINTF_DIR) fclean -s > /dev/null 2>&1
-	@echo "✅  $(NAME) binary has been deleted."
+	
+
+fclean_msg: fclean
 	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
+	@echo "✅  $(LIBFT) library has been deleted."
+	@echo "✅  $(NAME) binary has been deleted."
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"
 	
 re: fclean all
 
