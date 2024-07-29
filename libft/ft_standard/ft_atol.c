@@ -6,13 +6,13 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 11:52:32 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 03:33:00 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/29 03:59:56 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-long int	ft_atol(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	long int	result;
 	int			sign;

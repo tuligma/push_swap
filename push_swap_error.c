@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:31:17 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 02:43:11 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/29 04:01:50 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	error_print(int error_code, char *error_message, char ***arr)
 	return (1);
 }
 
-int	other_element_checker(char *str, int (*fsign)(char), int (*fdigit)(char))
+int	other_element_checker(char *str, int (*fsign)(int), int (*fdigit)(int))
 {
 	int	x;
 	int	sign;

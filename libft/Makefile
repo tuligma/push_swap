@@ -6,7 +6,7 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/03 08:02:10 by npentini          #+#    #+#              #
-#    Updated: 2024/07/29 03:40:29 by npentini         ###   ########.fr        #
+#    Updated: 2024/07/29 03:57:24 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS = ft_standard/ft_atoi.c ft_standard/ft_isalnum.c \
 		ft_standard/ft_isalpha.c ft_standard/ft_isascii.c \
 		ft_standard/ft_isdigit.c ft_standard/ft_isprint.c \
 		ft_standard/ft_itoa.c ft_standard/ft_tolower.c \
-		ft_standard/ft_toupper.c \
+		ft_standard/ft_toupper.c  ft_standard/ft_issign.c \
+		ft_standard/ft_isspace.c ft_standard/ft_atol.c \
 		ft_memory/ft_bzero.c ft_memory/ft_calloc.c ft_memory/ft_memchr.c \
 		ft_memory/ft_memcmp.c ft_memory/ft_memcpy.c ft_memory/ft_memmove.c \
 		ft_memory/ft_memset.c \
