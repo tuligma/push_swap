@@ -6,11 +6,23 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:34:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 05:48:54 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/31 23:36:50 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
+
+void	free_struct_array(void **array, int x)
+{
+	if (array != NULL && *array!= NULL)
+	{
+		while (++x < PROTO_COUNT)
+		{
+			free(array[x]);
+			array[x] = NULL;
+		}
+	}
+}
 
 void	free_int_array(int **array)
 {
@@ -38,16 +50,36 @@ void	free_array(char ***array, int x)
 	}
 }
 
-// void	free_data_11(t_ps_hub **data, int x)
-// {
-// 	free_array(&(*data)->args, x);
-// }
+void	free_node(void *content)
+{
+	(void)content;
+}
 
 void	free_data_0(t_ps_hub **data, int x)
 {
 	free_data(data, 11, x);
 	if ((*data)->args != NULL)
 		free((*data)->args);
+	ft_lstclear(&(*data)->a->head, free_node);
+	ft_lstclear(&(*data)->b->head, free_node);
+	ft_lstclear(&(*data)->moves, free_node);
+	if ((*data)->protocols != NULL)
+	{
+		if ((*data)->protocols->sa != NULL)
+			free_struct_array((void **)&(*data)->protocols->sa, x);
+		free((*data)->protocols);
+		(*data)->protocols = NULL;
+	}
+	if ((*data)->a != NULL)
+	{
+		free((*data)->a);
+		(*data)->a = NULL;
+	}
+	if ((*data)->b != NULL)
+	{
+		free((*data)->b);
+		(*data)->b = NULL;
+	}
 	(*data)->args = NULL;
 	free(*data);
 	*data = NULL;

@@ -6,12 +6,12 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 03:28:58 by npentini          #+#    #+#              #
-#    Updated: 2024/07/29 04:57:19 by npentini         ###   ########.fr        #
+#    Updated: 2024/07/30 18:48:22 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRCS = push_swap.c push_swap_error.c push_swap_error_ext.c push_swap_free.c push_swap_init.c 
+SRCS = push_swap.c push_swap_error.c push_swap_error_ext.c push_swap_free.c push_swap_init.c push_swap_presort.c push_swap_stack.c push_swap_protocols1.c push_swap_protocols2.c
 COMP = cc
 CFLAGS = -Wall -Wextra -Werror
 DELETE = rm -rf

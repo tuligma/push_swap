@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 04:49:42 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 02:24:25 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:30:51 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ t_ps_hub	*init_handler(int argc, char *argv[])
 	if (data->args == NULL)
 		return(free_data(&data, 0, -1), NULL);
 	result = argument_extraction(data, argc, argv, argument_strip);
+	if (result != 0)
+		return(free_data(&data, 0, -1), NULL);
+	result = struct_init((void **)&data->a, sizeof(t_ps_stack));
+	if (result != 0)
+		return(free_data(&data, 0, -1), NULL);
+	result = struct_init((void **)&data->b, sizeof(t_ps_stack));
 	if (result != 0)
 		return(free_data(&data, 0, -1), NULL);
 	return (data);
