@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:44:08 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 23:37:45 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/01 03:57:09 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 typedef struct s_ps_stack
 {
+	int		min;
+	int		max;
 	int		count;
 	t_list	*head;
 	t_list	*tail;

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:34:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 23:36:50 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/01 02:06:44 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,4 @@ int	free_data(t_ps_hub **data, int which_to_free, int x)
 	}
 	return (1);
 }
+

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 21:23:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 12:51:16 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/01 04:28:06 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	position_locator(t_ps_hub *data)
 	while (sorted_args[x] != data->median)
 		x++;
 	data->d_min_mid = x + 1;
-	data->d_mid_max = data->arg_count - data->min;
+	data->d_mid_max = data->arg_count - data->d_min_mid;
 	free(sorted_args);
 	return (0);
 }
