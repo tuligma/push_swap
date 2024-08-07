@@ -6,6 +6,8 @@
 		"array": "cpp",
 		"string": "cpp",
 		"string_view": "cpp",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"push_swap_error.h": "c",
+		"temp": "c"
 	}
 }

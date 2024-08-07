@@ -6,393 +6,174 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:43:57 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/01 05:13:39 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 00:34:19 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-// int min_to_median(t_ps_hub *data)
-// {
-// 	t_ps_stack *b;
-// 	t_ps_stack  *a;
-// 	int content1;
-
-// 	b = data->b;
-// 	a = data->a;
-// 	while (b->count != 0)
-// 	{
-// 		content1 = *((int *)b->head->content);
-// 		if (content1 > data->min && content1 < data->median)
-// 		{
-// 			push(b, a);
-// 			if (add_move(data, data->protocols->sb) != 0 || sort_head_a(data) != 0)
-// 				return (EPSMAL);
-// 		}
-// 	}
-// 	reverse_rotate(a);
-// 	if (add_move(data, data->protocols->rra) != 0)
-// 		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-// 	return (0);
-// }
-
-
-// int median_to_max(t_ps_hub *data)
-// {
-// 	t_ps_stack *b;
-// 	t_ps_stack  *a;
-// 	int content1;
-// 	int	x;
-// 	// int	content2;
-
-// 	b = data->b;
-
-int	lst_sort_checker(t_ps_stack *stack)
+int	min_to_head(t_ps_hub *data, t_ps_stack *a)
 {
-	t_list *current;
-	int content1;
-	int	content2;
-	
-	current = stack->head;
-	while (current != NULL && current->next != NULL)
+	t_list	*current;
+	int	reverse;
+	int	pos;
+
+	current = a->head;
+	pos = 0;
+	reverse = 0;
+	while (current != NULL)
 	{
-		content1 = *((int *)current->content);
-		content2 = *((int *)current->next->content);
-		if (content1 > content2)
-			return (1);
+		if (*(int *)current->content == data->min)
+			break ;
+		pos++;
 		current = current->next;
 	}
-	return (0);
-}
-
-int	lst_rev_sort_checker(t_ps_stack *stack)
-{
-	t_list *current;
-	int content1;
-	int	content2;
-	
-	current = stack->head;
-	while (current != NULL && current->next != NULL)
+	if (a->count - pos < pos)
 	{
-		content1 = *((int *)current->content);
-		content2 = *((int *)current->next->content);
-		if (content1 < content2)
-			return (1);
-		current = current->next;
+		pos = a->count - pos;
+		reverse = 1;
 	}
-	return (0);
-}
-
-int	add_move(t_ps_hub *data, char *move)
-{
-	t_list *node;
-	
-	node = ft_lstnew((void *)move);
-	if (node == NULL)
-		return (EPSMAL);
-	if (data->moves == NULL)
-		data->moves = node;
+	if (reverse == 1)
+	{
+		if (rotate_or_reverse_action(data, a, pos, reverse_rotate) != 0)
+			return (EPSMAL);
+	}
 	else
-		ft_lstadd_back(&data->moves, node);
-	data->total_moves++;
-	return (0);
-}
-
-int sort_head_a(t_ps_hub *data)
-{
-	t_ps_stack *a;
-	int content1;
-	int	content2;
-
-	a = data->a;
-	content1 = *((int *)a->head->content);
-	content2 = *((int *)a->head->next->content);
-	if (content1 > content2)
 	{
-		swap(a);
-		if (add_move(data, data->protocols->sa) != 0)
-			return (EPSMAL);
-	}
-	return (0);
-}
-
-int	partition(t_ps_hub *data)
-{
-	t_ps_stack *a;
-	t_ps_stack *b;
-	int	content;
-	
-	a = data->a;
-	b = data->b;
-	while (data->a->count > 3)
-	{
-		content = *((int*)a->head->content);
-		if (content != data->min && content != data->median && content != data->median)
-		{
-			push(a,b);
-			if (b->count == 1)
-			{
-				b->min = content;
-				b->max = content;
-			}
-			else
-			{
-				if (content < b->min)
-					b->min = content;
-				if (content > b->max)
-					b->max = content;
-			}
-			
-			if (add_move(data, data->protocols->pb) != 0)
-				return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-		}
-		else
-		{
-			rotate(a);
-			if (add_move(data, data->protocols->ra) != 0)
-				return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-		}
+		if (rotate_or_reverse_action(data, a, pos, rotate) != 0)
+						return (EPSMAL);
 	}
 	return (0);
 }
 
 
-// 	a = data->a;
-// 	x = -1;
-// 	while (++x < data->d_mid_max)
-// 	{
-// 		content1 = *((int *)b->head->content);
-// 		if (content1 > data->median && content1 < data->max)
-// 		{
-// 			push(b, a);
-// 			if (add_move(data, data->protocols->sb) != 0 || sort_head_a(data) != 0)
-// 				return (EPSMAL);
-// 		}
-// 		else
-// 		{
-// 			rotate(b);
-// 			if (add_move(data, data->protocols->rb) != 0)
-// 				return (EPSMAL);
-// 		}
-// 		x++;
-// 	}
-// 	reverse_rotate(a);
-// 	if (add_move(data, data->protocols->rra) != 0)
-// 		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-// 	return (0);
-// }
-
-int	sort_partition_b(t_ps_hub *data)
+int	three_arguments(t_ps_hub *data)
 {
-	t_ps_stack *b;
-	int content1;
-	int	content2;
-
-	b = data->b;
-	content1 = *((int *)b->head->content);
-	content2 = *((int *)b->head->next->content);
-	while(lst_rev_sort_checker(b) != 0)
+	if (*((int *)data->a->head->content) == data->max)
 	{
-		content1 = *((int *)b->head->content);
-		content2 = *((int *)b->head->next->content);
-		if (content1 == b->min && content2 == b->max)
-		{
-			rotate(b);
-			if (add_move(data, data->protocols->rb) != 0)
-				return (EPSMAL);
-		}
-		else if (content1 < content2)
-		{
-			swap(b);
-			if (add_move(data, data->protocols->sb) != 0)
-			return (EPSMAL);
-		}
-		else
-		{
-			rotate(b);
-			if (add_move(data, data->protocols->rb) != 0)
-				return (EPSMAL);
-		}
+		rotate(data->a);
+		if (add_move(data, data->protocols->ra) != 0)
+			return (EPSMAL);	
 	}
-	return (0);
-}
-
-	int	sort_partition_x(t_ps_hub *data)
+	else if (*((int *)data->a->head->next->content) == data->max)
 	{
-		t_ps_stack *a;
-		int content1;
-		int	content2;
-
-		a = data->a;
-		content1 = *((int *)a->head->content);
-		content2 = *((int *)a->head->next->content);
-		while(1)
-		{
-			content1 = *((int *)a->head->content);
-			content2 = *((int *)a->head->next->content);
-			if (content1 == data->max && content2 == data->min)
-				break ;
-			if (content1 < content2)
-			{
-				swap(a);
-				if (add_move(data, data->protocols->sa) != 0)
-				return (EPSMAL);
-			}
-			else
-			{
-				rotate(a);
-				if (add_move(data, data->protocols->ra) != 0)
-					return (EPSMAL);
-			}
-		}
-		return (0);
-}
-
-int sort_partition_a(t_ps_hub *data)
-{
-	t_ps_stack *a;
-	int content1;
-	int	content2;
-
-	a = data->a;
-	content1 = *((int *)a->head->content);
-	content2 = *((int *)a->head->next->content);
-	if (content1 == data->median && content2 == data->min)
-	{
-		swap(a);
-		if (add_move(data, data->protocols->sa) != 0)
-			return (EPSMAL);
-		reverse_rotate(a);
+		reverse_rotate(data->a);
 		if (add_move(data, data->protocols->rra) != 0)
 			return (EPSMAL);
 	}
-	else if (content1 == data->median && content2 == data->max)
+	if (*((int *)data->a->head->content) > *((int *)data->a->head->next->content))
 	{
-		swap(a);
+		swap(data->a);
 		if (add_move(data, data->protocols->sa) != 0)
 			return (EPSMAL);
 	}
-	else if (content1 == data->max && content2 == data->median)
+	return (0);
+}
+
+int	two_argument(t_ps_hub *data)
+{
+	
+	int			content_1;
+	int			content_2;
+
+	content_1 = *((int *)data->a->head->content);
+	content_2 = *((int *)data->a->head->next->content);
+	if (data->arg_count == 2 && content_1 > content_2)
 	{
-		swap(a);
+		swap(data->a);
 		if (add_move(data, data->protocols->sa) != 0)
 			return (EPSMAL);
-		rotate(a);
-		if (add_move(data, data->protocols->ra) != 0)
-			return (EPSMAL);
-	}
-	else if (content1 == data->min && content2 == data->max)
-	{
-		rotate(a);
-		if (add_move(data, data->protocols->ra) != 0)
-			return (EPSMAL);
 	}
 	return (0);
 }
 
-int	sort_stack_median(t_ps_hub *data)
-{
-	t_ps_stack *b;
-	t_ps_stack *a;
-	int	content;
-	int	x;
-
-	b = data->b;
-	a = data->a;
-	x = -1;
-	while (++x < data->d_mid_max)
-	{
-		content = *((int *)b->head->content);
-		if (content < data->max && content > data->median)
-		{
-			push(b,a);
-			if (add_move(data, data->protocols->pa) != 0 || sort_head_a(data) != 0)
-				return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-		}
-	}
-	reverse_rotate(a);
-	if (add_move(data, data->protocols->rra) != 0)
-		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-	return (0);
-}
-
-int	sort_stack_min(t_ps_hub *data)
-{
-	t_ps_stack *b;
-	t_ps_stack *a;
-
-	b = data->b;
-	a = data->a;
-	while (b->count != 0)
-	{
-		push(b,a);
-		if (add_move(data, data->protocols->pa) != 0)
-			return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-		// sort_head_a(data);
-	}
-	reverse_rotate(a);
-	if (add_move(data, data->protocols->rra) != 0)
-		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-	return (0);
-}
-
-void	print_moves(t_list *moves)
-{
-	t_list *current;
-	char	*str;
-	
-	current = moves;
-	while(current != NULL)
-	{
-		str = (char *)current->content;
-		ft_printf("%s\n", str);
-		current = current->next;
-	}
-}
-
-void	print_protocols(void **moves)
-{
-	int	x;
-	
-	x = -1;
-	while(++x < PROTO_COUNT)
-	{
-		ft_printf("%s -> move: %d\n", (char *)moves[x], x);
-	}
-}
 
 int	main(int argc, char *argv[])
 {
 	t_ps_hub *data;
-	
+
 	if (error_checker(argc, argv) == 1)
 		return (1);
 	data = init_handler(argc, argv);
 	if (data == NULL)
 		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
-	if (dup_checker(data) != 0 || sort_checker(data) != 0)
+	if (dup_checker(data) != 0 || (data->arg_count >= 3 && sort_checker(data) != 0))
 		return (free_data(&data, 0, -1));
-	if (position_locator(data) != 0)
+	if (data->arg_count >= 3 && position_locator(data) != 0)
 		return (free_data(&data, 0, -1));
-	if (push_args_to_node(data) != 0)
+	if (push_args_to_node(data, data->a, data->args, data->arg_count) != 0)
 		return (free_data(&data, 0, -1));
-	partition(data);
-	sort_partition_a(data);
-	sort_partition_b(data);
-	sort_stack_median(data);
-	sort_stack_min(data);
+	ft_printf("\nStack A:\n");
+	ft_lstiter(data->a->head, print_node);
 
+	if (data->arg_count == 2)
+		two_argument(data);
+	else if (data->arg_count == 3)
+		three_arguments(data);
+	else
+	{
+		ft_printf("\nStack A:\n");
+		ft_lstiter(data->a->head, print_node);
+		int subsq = count_ascend_series(data->a);
+		ft_printf("ascending series count: %d\n", subsq);
+		data->series = store_series(data, data->a, count_ascend_series);
+		ft_printf("start: %d | end: %d\n", data->series->start, data->series->end);
+		for (int x = 0; x < data->series->length; x++)
+		{
+			ft_printf("%d ", data->args[data->series->start + x]);
+		}
+		if (push_args_to_node(data, data->series->x, data->series->series, data->series->length) != 0)
+			return (free_data(&data, 0, -1));
+		ft_printf("\nStack X:\n");
+		ft_lstiter(data->series->x->head, print_node);
+		separation(data);
 
-	// if (lst_sort_checker(data->a))
-	// ft_printf("\n");
-	print_moves(data->moves);
-	// ft_printf("\ntotal moves: %d\n\n", data->total_moves);
-	// if (lst_sort_checker(data->a) == 0)
-	// {
-	// 	ft_printf("\nstack a:\n");
-	// 	ft_lstiter(data->a->head, print_node);
-	// 	ft_printf("Sorted asf!!!");
-	// }
+		find_which_to_push(data, data->b, data->a);
+		ft_printf("\nMerging:\n");
+		ft_printf("\nStack A:\n");
+		ft_lstiter(data->a->head, print_node);
+		ft_printf("\nStack B:\n");
+		ft_lstiter(data->b->head, print_node);
+		min_to_head(data, data->a);
+		ft_printf("\nArrange:\n");
+		ft_printf("\nStack A:\n");
+		ft_lstiter(data->a->head, print_node);
+	}
+	// // ft_printf("\nSeparation:\n");
+	// // ft_printf("\nStack A:\n");
+	// // ft_lstiter(data->a->head, print_node);
+	// // ft_printf("\nStack B:\n");
+	// // ft_lstiter(data->b->head, print_node);
+
+	// // // ft_printf("min: %d | median: %d | max: %d | d_mid_max: %d | d_min_mid: %d | arg_count: %d\n", data->min, data->median, data->max, data->d_mid_max, data->d_min_mid, data->arg_count);
+	// // // sort_partition_a(data);
+	// // // sort_partition_b(data);
+	// // ft_printf("\nSort:\n");
+	// // ft_printf("\nStack A:\n");
+	// // ft_lstiter(data->a->head, print_node);
+	// // ft_printf("\nStack B:\n");
+	// // ft_lstiter(data->b->head, print_node);
+	
+	// // push_b_inbetweens_median_to_max(data);
+	// // push_b_inbetweens_min_to_median(data);
+
+	// // ft_printf("\nSort:\n");
+	// // ft_printf("\nStack A:\n");
+	// // ft_lstiter(data->a->head, print_node);
+	// // ft_printf("\nStack B:\n");
+	// // ft_lstiter(data->b->head, print_node);
+
+	if (!lst_sort_checker(data->a))
+		print_moves(data->moves);
+	// // // ft_printf("\nAfter:\n");
+	// // // ft_lstiter(data->a->head, print_node);
+	ft_printf("\ntotal moves: %d\n\n", data->total_moves);
+	if (lst_sort_checker(data->a) == 0)
+	{
+		ft_printf("\nstack a:\n");
+		ft_lstiter(data->a->head, print_node);
+		ft_printf("Sorted asf!!!\n\n");
+	}
 	free_data(&data, 0, -1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:30:31 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 23:22:44 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/06 10:55:09 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,28 @@ int	moves_init(t_ps_hub *data)
 	return (result);
 }
 
-int	push_args_to_node(t_ps_hub *data)
+int	push_args_to_node(t_ps_hub *data, t_ps_stack *stack, int *args, int arg_count)
 {
 	t_list *node;
 	int			x;
 
 	x = -1;
-	while (++x < data->arg_count)
+	while (++x < arg_count)
 	{
-		node = ft_lstnew(&data->args[x]);
+		node = ft_lstnew(&args[x]);
 		if (node == NULL)
 			return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
 		if (x == 0)
-		{
-			data->a->head = node;
-		}
+			stack->head = node;
 		else
-			ft_lstadd_back(&data->a->head, node);
+			ft_lstadd_back(&stack->head, node);
 	}
-	data->a->tail = ft_lstlast(data->a->head);
-	data->a->count = data->arg_count;
-	if (moves_init(data) != 0)
-		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
+	stack->tail = ft_lstlast(stack->head);
+	stack->count = arg_count;
+	if (data->protocols == NULL)
+	{ 	
+		if (moves_init(data) != 0)
+			return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
+	}
 	return (0);
 }

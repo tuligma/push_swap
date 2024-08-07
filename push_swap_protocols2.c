@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 18:47:10 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 01:53:25 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:21:12 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,8 @@ void	push_head(t_ps_stack *stack, t_list *node)
 	stack->count++;
 }
 
-void both_protocol(t_ps_stack *a, t_ps_stack *b, void (*fsingle)(t_ps_stack *), void (*fdouble)(t_ps_stack *, t_ps_stack *))
+void both_protocol(t_ps_stack *a, t_ps_stack *b, void (*fsingle)(t_ps_stack *))
 {
-	if (fsingle == NULL)
-	{
-		fdouble(a, b);
-	}
-	else
-	{
-		fsingle(a);
-		fsingle(b);
-	}
+	fsingle(a);
+	fsingle(b);
 }

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:20:53 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 13:07:16 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 00:44:07 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	rotate(t_ps_stack *stack)
 	head = stack->head;
 	tail = stack->tail;
 	count = stack->count;
-
 	if (count > 1)
 	{
 		new_head = head->next;
@@ -94,14 +93,17 @@ void	swap(t_ps_stack *stack)
 	{
 		node_1 = head;
 		node_2 = head->next;
-		node_1->next = node_2->next;
-		if (node_1 != NULL)
-			node_1->next->prev = node_1;
-		else
-			stack->tail = node_1;
-		node_2->next = node_1;
-		node_2->prev = NULL;
-		node_1->prev = node_2;
-		stack->head = node_2;
+		if (node_2 != NULL)
+		{
+			node_1->next = node_2->next;
+			if (node_1->next != NULL)
+				node_1->next->prev = node_1;
+			else
+				stack->tail = node_1;
+			node_2->next = node_1;
+			node_2->prev = NULL;
+			node_1->prev = node_2;
+			stack->head = node_2;
+		}
 	}
 }

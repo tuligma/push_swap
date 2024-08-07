@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:34:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/01 02:06:44 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/07 02:12:32 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,27 @@ void	free_data_0(t_ps_hub **data, int x)
 		free((*data)->b);
 		(*data)->b = NULL;
 	}
+	if ((*data)->series != NULL)
+	{
+		if ((*data)->series->series != NULL)
+			free_int_array(&(*data)->series->series);
+		ft_lstclear(&(*data)->series->x->head, free_node);
+		free((*data)->series->x);
+		free((*data)->series);
+		(*data)->series = NULL;
+	}
+	if ((*data)->cost != NULL)
+	{
+		free((*data)->cost);
+		(*data)->cost = NULL;
+	}
+	// if ((*data)->info != NULL)
+	// {
+	// 	{
+	// 	free((*data)->info);
+	// 	(*data)->info = NULL;
+	// }
+	// }
 	(*data)->args = NULL;
 	free(*data);
 	*data = NULL;
