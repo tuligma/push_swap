@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:23:40 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 00:23:50 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 04:06:23 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ void	find_best_move_in_b(t_ps_hub *data, t_ps_stack *b, t_ps_cost *cost)
 	cost->best_step = INT_MAX;
 	while (current != NULL)
 	{
+		// if (data->d_min_mid - 2 > 0 && *((int *)current->content) < data->median)
+		// {
+		// 	current = current->next;
+		// 	continue ;
+		// }
 		is_best_move_in_b(data, current, pos_b);
 		current = current->next;
 		pos_b++;
+		// (data->d_min_mid)--;
 	}
 }

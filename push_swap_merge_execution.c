@@ -1,64 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_sort_stacks.c                            :+:      :+:    :+:   */
+/*   push_swap_merge_execution.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:26:52 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 00:24:47 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 03:43:34 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
-
-
-// void	find_best_move_in_b(t_ps_hub *data, t_ps_stack *b, t_ps_cost *cost)
-// {
-// 	t_list *current;
-// 	int	reverse_a;
-// 	int	reverse_b;
-// 	int	pos_a;
-// 	int	pos_b;
-// 	int	temp_pos_b;
-
-// 	current = b->head;
-// 	pos_b = 0;
-// 	cost->best_step = INT_MAX;
-// 	while (current != NULL)
-// 	{
-// 		reverse_a = 0;
-// 		reverse_b = 0;
-// 		pos_a = find_insert_position(data, data->a, *((int *)current->content));
-// 		temp_pos_b = pos_b;
-// 		if (b->count - temp_pos_b < pos_b)
-// 		{
-// 			temp_pos_b = b->count - temp_pos_b;
-// 			reverse_b = 1;
-// 		}
-// 		else
-// 			reverse_b = 0;
-// 		if (data->a->count - pos_a < pos_a)
-// 		{
-// 			pos_a = data->a->count - pos_a;
-// 			reverse_a = 1;
-// 		}
-// 		else
-// 			reverse_a = 0;
-// 		if (pos_a + temp_pos_b < cost->best_step)
-// 		{
-// 			cost->best_step = pos_a + temp_pos_b;
-// 			cost->pos_a = pos_a;
-// 			cost->pos_b = temp_pos_b;
-// 			cost->reverse_a = reverse_a;
-// 			cost->reverse_b = reverse_b;
-// 		}
-// 		// if (cost->best_step <= 3)
-// 		// 	return ;
-// 		current = current->next;
-// 		pos_b++;
-// 	}
-// }
 
 
 int	rotate_or_reverse_action(t_ps_hub *data,
@@ -109,40 +61,63 @@ int	final_rotation_ab(t_ps_hub *data, t_ps_stack *stack, t_ps_cost *cost, int po
 	return (0);
 }
 
+int	simultaneuos_action(t_ps_hub *data,
+	int count ,void (*f)(t_ps_stack *))
+{
+	t_ps_stack *a;
+	t_ps_stack *b;
+	char	*protocol;
+	int	x;
+	
+	a = data->a;
+	b = data->b;
+	if (f == reverse_rotate)
+		protocol = data->protocols->rrr;
+	else
+		protocol = data->protocols->rr;
+	x = -1;
+	while (++x < count)
+	{
+		both_protocol(a, b, f);
+		if (add_move(data, protocol) != 0)
+				return (EPSMAL);
+		(data->cost->pos_a)--;
+		(data->cost->pos_b)--;
+	}
+	return (0);
+}
+
+int	final_rotation_simultaneous(t_ps_hub *data, t_ps_cost *cost)
+{
+	int	count;
+	void (*f)(t_ps_stack *);
+	
+	if (cost->pos_a > 0 && cost->pos_b > 0 && cost->reverse_a == cost->reverse_b)
+	{
+		if (cost->pos_a <= cost->pos_b)
+			count = cost->pos_a;
+		else if (cost->pos_b < cost->pos_a)
+			count = cost->pos_b;
+		if (cost->reverse_a == 1 && cost->reverse_b == 1)
+			f = reverse_rotate;
+		else
+			f = rotate;
+		if (simultaneuos_action(data, count, f) != 0)
+			return (EPSMAL);
+	}
+	return 0;
+}
+
 int	find_which_to_push(t_ps_hub* data, t_ps_stack *b, t_ps_stack *a)
 {
 	t_ps_cost *cost;
-
+	
 	if (data->cost == NULL && struct_init((void **)&data->cost, sizeof(t_ps_cost)) != 0)
 		return (EPSMAL);
 	cost = data->cost;
 	find_best_move_in_b(data, b, cost);
-	// if (cost->pos_a > 0)
-	// {
-	// 	if (cost->reverse_a == 1)
-	// 	{
-	// 		if (rotate_or_reverse_stack_a(data, a, cost->pos_a, reverse_rotate) != 0)
-	// 			return (EPSMAL);
-	// 	}
-	// 	else 
-	// 	{
-	// 		if (rotate_or_reverse_stack_a(data, a, cost->pos_a, rotate) != 0)
-	// 			return (EPSMAL);
-	// 	}
-	// }
-	// if (cost->pos_b > 0)
-	// {
-	// 	if (cost->reverse_b == 1)
-	// 	{
-	// 		if(rotate_or_reverse_stack_a(data, b, cost->pos_b, reverse_rotate) != 0)
-	// 			return (EPSMAL);
-	// 	}
-	// 	else
-	// 	{
-	// 		if (rotate_or_reverse_stack_a(data, b, cost->pos_b, rotate) != 0)
-	// 			return (EPSMAL);
-	// 	}
-	// }
+	if (final_rotation_simultaneous(data, cost) != 0)
+		return (EPSMAL);
 	if (final_rotation_ab(data, a, cost, cost->pos_a) != 0)
 		return (EPSMAL);
 	if (final_rotation_ab(data, b, cost, cost->pos_b) != 0)

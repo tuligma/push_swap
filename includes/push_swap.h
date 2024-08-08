@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:44:08 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/07 23:06:53 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 03:13:57 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,7 @@ typedef struct s_ps_series
 
 typedef struct s_ps_cost
 {
-	int	best_reverse_a;
-	int	best_reverse_b;
-	int	best_pos_a;
-	int	best_pos_b;
 	int best_step;
-	int	best_both_step;
-	int	best_both_reverse;
 	int	reverse_a;
 	int	reverse_b;
 	int	pos_a;

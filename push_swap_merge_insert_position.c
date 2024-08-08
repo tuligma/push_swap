@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_merge_helper.c                           :+:      :+:    :+:   */
+/*   push_swap_merge_insert_position.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 23:04:34 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 00:21:23 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 04:02:57 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ int find_insert_position(t_ps_hub *data, t_ps_stack *a, int content)
 	current = a->head;
 	while (current != NULL)
 	{
+		// if (data->d_min_mid > 0 && *((int *)current->content) < data->median)
+		// {
+		// 	current = current->next;
+		// 	position++;
+		// 	continue ;
+		// }
 		if (insertion_position_max_min(current, content, max, min) == 1)
 			return (++position);
 		if (insertion_position_inbetween(data, current, content, max) == 1)

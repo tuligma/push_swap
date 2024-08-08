@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:43:57 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 00:34:19 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 04:32:14 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int	main(int argc, char *argv[])
 		return (free_data(&data, 0, -1));
 	if (push_args_to_node(data, data->a, data->args, data->arg_count) != 0)
 		return (free_data(&data, 0, -1));
-	ft_printf("\nStack A:\n");
-	ft_lstiter(data->a->head, print_node);
+	// ft_printf("\nStack A:\n");
+	// ft_lstiter(data->a->head, print_node);
 
 	if (data->arg_count == 2)
 		two_argument(data);
@@ -112,32 +112,32 @@ int	main(int argc, char *argv[])
 		three_arguments(data);
 	else
 	{
-		ft_printf("\nStack A:\n");
-		ft_lstiter(data->a->head, print_node);
-		int subsq = count_ascend_series(data->a);
-		ft_printf("ascending series count: %d\n", subsq);
+		// ft_printf("\nStack A:\n");
+		// ft_lstiter(data->a->head, print_node);
+		// int subsq = count_ascend_series(data->a);
+		// ft_printf("ascending series count: %d\n", subsq);
 		data->series = store_series(data, data->a, count_ascend_series);
-		ft_printf("start: %d | end: %d\n", data->series->start, data->series->end);
-		for (int x = 0; x < data->series->length; x++)
-		{
-			ft_printf("%d ", data->args[data->series->start + x]);
-		}
+		// ft_printf("start: %d | end: %d\n", data->series->start, data->series->end);
+		// for (int x = 0; x < data->series->length; x++)
+		// {
+		// 	ft_printf("%d ", data->args[data->series->start + x]);
+		// }
 		if (push_args_to_node(data, data->series->x, data->series->series, data->series->length) != 0)
 			return (free_data(&data, 0, -1));
-		ft_printf("\nStack X:\n");
-		ft_lstiter(data->series->x->head, print_node);
+		// ft_printf("\nStack X:\n");
+		// ft_lstiter(data->series->x->head, print_node);
 		separation(data);
 
 		find_which_to_push(data, data->b, data->a);
-		ft_printf("\nMerging:\n");
-		ft_printf("\nStack A:\n");
-		ft_lstiter(data->a->head, print_node);
-		ft_printf("\nStack B:\n");
-		ft_lstiter(data->b->head, print_node);
+		// ft_printf("\nMerging:\n");
+		// ft_printf("\nStack A:\n");
+		// ft_lstiter(data->a->head, print_node);
+		// ft_printf("\nStack B:\n");
+		// ft_lstiter(data->b->head, print_node);
 		min_to_head(data, data->a);
-		ft_printf("\nArrange:\n");
-		ft_printf("\nStack A:\n");
-		ft_lstiter(data->a->head, print_node);
+		// ft_printf("\nArrange:\n");
+		// ft_printf("\nStack A:\n");
+		// ft_lstiter(data->a->head, print_node);
 	}
 	// // ft_printf("\nSeparation:\n");
 	// // ft_printf("\nStack A:\n");
@@ -170,8 +170,8 @@ int	main(int argc, char *argv[])
 	ft_printf("\ntotal moves: %d\n\n", data->total_moves);
 	if (lst_sort_checker(data->a) == 0)
 	{
-		ft_printf("\nstack a:\n");
-		ft_lstiter(data->a->head, print_node);
+		// ft_printf("\nstack a:\n");
+		// ft_lstiter(data->a->head, print_node);
 		ft_printf("Sorted asf!!!\n\n");
 	}
 	free_data(&data, 0, -1);
