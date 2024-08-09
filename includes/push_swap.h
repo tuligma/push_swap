@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:44:08 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 03:13:57 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:23 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ typedef struct s_ps_hub
 # include "push_swap_partition.h"
 # include "push_swap_merge.h"
 
-int	push_args_to_node(t_ps_hub *data, t_ps_stack *stack, int *args, int arg_count);
+
 void	print_node(void *content);
-void	print_protocols(void **moves);
+void	move_push(t_ps_stack *push_to, char *move, t_ps_hub *data);
+void	move_both(void (*f)(t_ps_stack *), char *move, t_ps_hub *data);
+void	move_single(void (*f)(t_ps_stack *), t_ps_stack *stack, char *move, t_ps_hub *data);
 int	three_arguments(t_ps_hub *data);
 int	two_arguments(t_ps_hub *data);
-int	rotate_or_reverse_stack_a(t_ps_hub *data, t_ps_stack *stack, int count ,void (*f)(t_ps_stack *));
-int	min_to_head(t_ps_hub *data, t_ps_stack *a);
+void	min_to_head(t_ps_hub *data, t_ps_stack *a);
 #endif

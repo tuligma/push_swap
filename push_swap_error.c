@@ -6,23 +6,20 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:31:17 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 04:01:50 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:39:14 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-int	error_print(int error_code, char *error_message, char ***arr)
+int	error_print(int error_code)
 {
 	if (error_code != 0)
 	{
 		if (error_code != EPSARG)
-			ft_printf("Error\n");
-		ft_printf("%s\n", error_message);
-		if (arr != NULL)
-			free_array(arr, -1);
+			ft_putstr_fd("Error\n", STDERR_FILENO);
 	}
-	return (1);
+	return (EXIT_FAILURE);
 }
 
 int	other_element_checker(char *str, int (*fsign)(int), int (*fdigit)(int))
@@ -57,15 +54,21 @@ int	is_valid_number(char *str)
 
 	arg = ft_split(str, ' ');
 	if (arg == NULL)
-		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
+		return (EXIT_FAILURE);
 	x = -1;
 	while (arg[++x] != NULL)
 	{
 		result = other_element_checker(arg[x], ft_issign, ft_isdigit);
 		if (result != 0)
-			return (error_print(EPSINA, EMSG_EPSINA, &arg));
+		{
+				free_array(&arg, -1);
+			return (error_print(ERR_OTHR_EL));
+		}
 		if (ft_atol(arg[x]) > INT_MAX || ft_atol(arg[x]) < INT_MIN)
-			return (error_print(EPSALM, EMSG_EPSALM, &arg));
+		{
+			free_array(&arg, -1);
+			return (error_print(ERR_INT_LIMIT));
+		}
 	}
 	free_array(&arg, -1);
 	return (0);
@@ -75,13 +78,13 @@ int	error_checker(int argc, char *argv[])
 {
 	int	x;
 
-	if (argc < 3)
-		return (error_print(EPSARG, EMSG_EPSARG, NULL));
+	if (argc < 2)
+		return (2);
 	x = 0;
 	while (++x < argc)
 	{
 		if (argv[x] == NULL)
-			return (1);
+			return (EXIT_FAILURE);
 		if (is_valid_number(argv[x]) != 0)
 			return (1);
 	}

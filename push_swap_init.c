@@ -6,17 +6,25 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 04:49:42 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 20:30:51 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:36:58 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
+void	*print_free_error(t_ps_hub *data, int error_code)
+{
+	error_print(error_code);
+	if (data != NULL)
+		free_data(&data, 0, -1);
+	return (NULL);
+}
+
 int	struct_init(void **struct_ptr, size_t struct_size)
 {
 	*struct_ptr = ft_calloc(1, struct_size);
 	if (*struct_ptr == NULL)
-		return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
+		return (1);
 	return (0);
 }
 
@@ -55,7 +63,7 @@ int	argument_extraction(t_ps_hub *data, int argc, char **argv, int (*f)(t_ps_hub
 	{
 		args = ft_split(argv[x], ' ');
 		if (args == NULL)
-			return (error_print(EPSMAL, EMSG_EPSMAL, NULL));
+			return (EXIT_FAILURE);
 		result = f(data,args);
 		free_array(&args, -1);
 		if (result != 0)
@@ -71,21 +79,21 @@ t_ps_hub	*init_handler(int argc, char *argv[])
 
 	result = struct_init((void **)&data, sizeof(t_ps_hub));
 	if (result != 0)
-		return(NULL);
+		return(print_free_error(NULL, ERR_MALLOC_FAILED));
 	result = argument_extraction(data, argc, argv, argument_counter);
 	if (result != 0)
-		return(free_data(&data, 0, -1), NULL);
+		return(print_free_error(data, ERR_MALLOC_FAILED));
 	data->args = ft_calloc(data->arg_count + 1, sizeof(int));
 	if (data->args == NULL)
-		return(free_data(&data, 0, -1), NULL);
+		return(print_free_error(data, ERR_MALLOC_FAILED));
 	result = argument_extraction(data, argc, argv, argument_strip);
 	if (result != 0)
-		return(free_data(&data, 0, -1), NULL);
+		return(print_free_error(data, ERR_MALLOC_FAILED));
 	result = struct_init((void **)&data->a, sizeof(t_ps_stack));
 	if (result != 0)
-		return(free_data(&data, 0, -1), NULL);
+		return(print_free_error(data, ERR_MALLOC_FAILED));
 	result = struct_init((void **)&data->b, sizeof(t_ps_stack));
 	if (result != 0)
-		return(free_data(&data, 0, -1), NULL);
+		return(print_free_error(data, ERR_MALLOC_FAILED));
 	return (data);
 }

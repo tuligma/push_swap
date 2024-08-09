@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:20:53 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 00:44:07 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/09 13:25:49 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ void	push(t_ps_stack *pop, t_ps_stack *push)
 {
 	t_list	*node;
 
-	node = pop_head(pop);
-	push_head(push, node);
+	if (pop->count > 0)
+	{
+		node = pop_head(pop);
+		push_head(push, node);
+	}
 }
 
 void	reverse_rotate(t_ps_stack *stack)

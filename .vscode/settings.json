@@ -8,6 +8,11 @@
 		"string_view": "cpp",
 		"ft_printf.h": "c",
 		"push_swap_error.h": "c",
-		"temp": "c"
+		"temp": "c",
+		"push_swap_partition.h": "c",
+		"chrono": "c",
+		"random": "c",
+		"limits": "c",
+		"semaphore": "c"
 	}
 }

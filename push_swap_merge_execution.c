@@ -6,38 +6,38 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:26:52 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 03:43:34 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:15:36 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
 
-int	rotate_or_reverse_action(t_ps_hub *data,
+void	rotate_or_reverse_action(t_ps_hub *data,
 	t_ps_stack *stack, int count ,void (*f)(t_ps_stack *))
 {
 	char	*protocol;
 	int	x;
 	
 	if (stack == data->a && f == rotate)
-		protocol = data->protocols->ra;
+		protocol = STR_RA;
 	else if (stack == data->a && f == reverse_rotate)
-		protocol = data->protocols->rra;
+		protocol = STR_RRA;
 	else if (stack == data->b && f == rotate)
-		protocol = data->protocols->rb;
+		protocol = STR_RB;
 	else if (stack == data->b && f == reverse_rotate)
-		protocol = data->protocols->rrb;
+		protocol = STR_RRB;
 	x = -1;
 	while (++x < count)
 	{
-		f(stack);
-		if (add_move(data, protocol) != 0)
-				return (EPSMAL);
+		if (stack == data->a)
+			move_single(f, data->a, protocol, data);
+		else if (stack == data->b)
+			move_single(f, data->b, protocol, data);
 	}
-	return (0);
 }
 
-int	final_rotation_ab(t_ps_hub *data, t_ps_stack *stack, t_ps_cost *cost, int pos)
+void	final_rotation_ab(t_ps_hub *data, t_ps_stack *stack, t_ps_cost *cost, int pos)
 {
 	int	reverse;
 
@@ -48,46 +48,32 @@ int	final_rotation_ab(t_ps_hub *data, t_ps_stack *stack, t_ps_cost *cost, int po
 	if (pos > 0)
 	{
 		if (reverse == 1)
-		{
-			if (rotate_or_reverse_action(data, stack, pos, reverse_rotate) != 0)
-				return (EPSMAL);
-		}
+			rotate_or_reverse_action(data, stack, pos, reverse_rotate);
 		else 
-		{
-			if (rotate_or_reverse_action(data, stack, pos, rotate) != 0)
-				return (EPSMAL);
-		}
+			rotate_or_reverse_action(data, stack, pos, rotate);
 	}
-	return (0);
 }
 
-int	simultaneuos_action(t_ps_hub *data,
+void	simultaneuos_action(t_ps_hub *data,
 	int count ,void (*f)(t_ps_stack *))
 {
-	t_ps_stack *a;
-	t_ps_stack *b;
 	char	*protocol;
 	int	x;
 	
-	a = data->a;
-	b = data->b;
 	if (f == reverse_rotate)
-		protocol = data->protocols->rrr;
+		protocol = STR_RRR;
 	else
-		protocol = data->protocols->rr;
+		protocol = STR_RR;
 	x = -1;
 	while (++x < count)
 	{
-		both_protocol(a, b, f);
-		if (add_move(data, protocol) != 0)
-				return (EPSMAL);
+		move_both(f, protocol, data);
 		(data->cost->pos_a)--;
 		(data->cost->pos_b)--;
 	}
-	return (0);
 }
 
-int	final_rotation_simultaneous(t_ps_hub *data, t_ps_cost *cost)
+void final_rotation_simultaneous(t_ps_hub *data, t_ps_cost *cost)
 {
 	int	count;
 	void (*f)(t_ps_stack *);
@@ -102,30 +88,27 @@ int	final_rotation_simultaneous(t_ps_hub *data, t_ps_cost *cost)
 			f = reverse_rotate;
 		else
 			f = rotate;
-		if (simultaneuos_action(data, count, f) != 0)
-			return (EPSMAL);
+		simultaneuos_action(data, count, f);
 	}
-	return 0;
 }
 
-int	find_which_to_push(t_ps_hub* data, t_ps_stack *b, t_ps_stack *a)
+int	execute_merge(t_ps_hub* data)
 {
+	t_ps_stack *a;
+	t_ps_stack *b;
 	t_ps_cost *cost;
 	
 	if (data->cost == NULL && struct_init((void **)&data->cost, sizeof(t_ps_cost)) != 0)
-		return (EPSMAL);
+		return (ERR_MALLOC_FAILED);
+	a = data->a;
+	b = data->b;
 	cost = data->cost;
 	find_best_move_in_b(data, b, cost);
-	if (final_rotation_simultaneous(data, cost) != 0)
-		return (EPSMAL);
-	if (final_rotation_ab(data, a, cost, cost->pos_a) != 0)
-		return (EPSMAL);
-	if (final_rotation_ab(data, b, cost, cost->pos_b) != 0)
-		return (EPSMAL);
-	push(b, a);
-			if (add_move(data, data->protocols->pa) != 0)
-				return (EPSMAL);
+	final_rotation_simultaneous(data, cost);
+	final_rotation_ab(data, a, cost, cost->pos_a);
+	final_rotation_ab(data, b, cost, cost->pos_b);
+	move_push(a, STR_PA, data);
 	if (b->count > 0)
-		find_which_to_push(data, b, a);
+		execute_merge(data);
 	return (0);
 }

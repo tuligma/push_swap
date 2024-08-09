@@ -6,13 +6,14 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 04:50:51 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/28 05:10:48 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:37:42 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_INIT_H
 # define PUSH_SWAP_INIT_H
 
+void	*print_free_error(t_ps_hub *data, int error_code);
 int			struct_init(void **struct_ptr, size_t struct_size);
 int			argument_counter(t_ps_hub *data ,char **args);
 int			argument_strip(t_ps_hub *data, char **args);

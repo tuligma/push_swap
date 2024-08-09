@@ -6,12 +6,26 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 03:28:58 by npentini          #+#    #+#              #
-#    Updated: 2024/08/08 00:28:18 by npentini         ###   ########.fr        #
+#    Updated: 2024/08/08 20:05:20 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRCS = push_swap.c push_swap_error.c push_swap_error_ext.c push_swap_free.c push_swap_init.c push_swap_presort.c push_swap_stack.c push_swap_protocols1.c push_swap_protocols2.c push_swap_partition.c push_swap_partition_conditions.c push_swap_partition_moves.c push_swap_partition_helper.c push_swap_merge_execution.c push_swap_merge_insert_position.c push_swap_merge_remove_position.c push_swap_push_stack_zipper.c push_swap_algorithm_utils.c
+SRCS = push_swap.c push_swap_error.c \
+		push_swap_error_ext.c \
+		push_swap_free.c \
+		push_swap_init.c \
+		push_swap_presort.c \
+		push_swap_stack.c \
+		push_swap_protocols1.c \
+		push_swap_protocols2.c \
+		push_swap_partition_helper.c \
+		push_swap_partition_moves.c \
+		push_swap_partition_conditions.c \
+		push_swap_partition.c \
+		push_swap_merge_insert_position.c \
+		push_swap_merge_remove_position.c \
+		push_swap_merge_execution.c
 COMP = cc
 CFLAGS = -Wall -Wextra -Werror
 DELETE = rm -rf

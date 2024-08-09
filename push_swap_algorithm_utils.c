@@ -6,13 +6,15 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:35:34 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 00:30:16 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/09 02:50:29 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-int	lst_sort_checker(t_ps_stack *stack)
+
+
+int	lst_rev_sort_checker(t_ps_stack *stack)
 {
 	t_list	*current;
 	int		content1;
@@ -23,30 +25,12 @@ int	lst_sort_checker(t_ps_stack *stack)
 	{
 		content1 = *((int *)current->content);
 		content2 = *((int *)current->next->content);
-		if (content1 > content2)
+		if (content1 < content2)
 			return (1);
 		current = current->next;
 	}
 	return (0);
 }
-
-// int	lst_rev_sort_checker(t_ps_stack *stack)
-// {
-// 	t_list	*current;
-// 	int		content1;
-// 	int		content2;
-
-// 	current = stack->head;
-// 	while (current != NULL && current->next != NULL)
-// 	{
-// 		content1 = *((int *)current->content);
-// 		content2 = *((int *)current->next->content);
-// 		if (content1 < content2)
-// 			return (1);
-// 		current = current->next;
-// 	}
-// 	return (0);
-// }
 
 void	print_moves(t_list *moves)
 {

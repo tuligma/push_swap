@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:26:43 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/07 19:41:44 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/09 13:55:50 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,14 @@ t_ps_series	*store_series(t_ps_hub *data, t_ps_stack *a,
 	series->series = ft_calloc(series->length, sizeof(int));
 	if (series->series == NULL)
 		return (NULL);
-	extract_last_ascend(a, series, a->tail, series->length);
+	if (series->length  == 1)
+	{
+		series->series[0] = *((int *)a->tail->content);
+		series->start = a->count - 1;
+		series->end = a->count -1;
+	}
+	else
+		extract_last_ascend(a, series, a->tail, series->length);
 	return (series);
 }
 
@@ -92,9 +99,10 @@ int	add_to_stack_x(t_ps_stack *x, int *length, int *content,
 
 	node = ft_lstnew(content);
 	if (node == NULL)
-		return (EPSMAL);
+		return (error_print(ERR_MALLOC_FAILED));;
 	ft_lstadd_front(&x->head, node);
-	f(x);
+	if (f != NULL)
+		f(x);
 	(*length)++;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 03:00:05 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/31 22:59:54 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:43:20 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define PUSH_SWAP_ERROR_CODES_H
 
 // error codes
+# define ERR_ONE_ARG 999// only one argument
 # define EPSARG 1000 // insufficient argument
-# define EPSINA 1001 // argument/s has other element aside what instructed
-# define EPSMAL 1003 // Memory allocation fails.
-# define EPSALM 1004 // Argument is more than int limits
-# define EPSDUP 1005 // Argument has duplicates.
-# define EPSSRT 1006 // Argument is sorted.
+# define ERR_OTHR_EL 1001 // argument/s has other element aside what instructed
+# define ERR_MALLOC_FAILED 1003 // Memory allocation fails.
+# define ERR_INT_LIMIT 1004 // Argument is more than int limits
+# define ERR_DUP_ARG 1005 // Argument has duplicates.
+# define ERR_SORTED_ARGS 1006 // Argument is sorted.
 
 
 // error messages

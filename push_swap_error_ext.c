@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 02:42:27 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 02:45:28 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:46:22 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	dup_checker(t_ps_hub *data)
 		while (++x < data->arg_count)
 		{
 			if (data->args[y] == data->args[x])
-				return (error_print(EPSDUP, EMSG_EPSDUP, NULL));
+				return (error_print(ERR_DUP_ARG));
 		}
 	}
 	return (0);
@@ -40,5 +40,5 @@ int	sort_checker(t_ps_hub *data)
 		if (data->args[x] > data->args[x + 1])
 			return (0);
 	}
-	return (error_print(EPSSRT, EMSG_EPSSRT, NULL));
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:34:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/07 02:12:32 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:24:07 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ void	free_data_0(t_ps_hub **data, int x)
 	free_data(data, 11, x);
 	if ((*data)->args != NULL)
 		free((*data)->args);
-	ft_lstclear(&(*data)->a->head, free_node);
-	ft_lstclear(&(*data)->b->head, free_node);
-	ft_lstclear(&(*data)->moves, free_node);
+	if ((*data)->a != NULL && (*data)->a->head != NULL)
+		ft_lstclear(&(*data)->a->head, free_node);
+	if ((*data)->b != NULL && (*data)->b->head != NULL)
+		ft_lstclear(&(*data)->b->head, free_node);
+	if ((*data)->moves != NULL)
+		ft_lstclear(&(*data)->moves, free_node);
 	if ((*data)->protocols != NULL)
 	{
 		if ((*data)->protocols->sa != NULL)

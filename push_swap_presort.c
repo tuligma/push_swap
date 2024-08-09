@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 21:23:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/01 04:28:06 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:18:53 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ int	position_locator(t_ps_hub *data)
 {
 	int	*sorted_args;
 	int	x;
+	
+	if (data->arg_count < 3)
+		return (0);
 	sorted_args = array_dup(data->args, data->arg_count);
 	if (sorted_args == NULL)
-		return (error_print(EPSMAL, EMSG_EPSALM, NULL));
+		return (error_print(ERR_MALLOC_FAILED));
 	ft_advanced_sort(sorted_args, data->arg_count);
 	data->min = sorted_args[0];
 	data->max = sorted_args[data->arg_count - 1];
