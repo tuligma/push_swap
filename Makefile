@@ -6,26 +6,31 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 03:28:58 by npentini          #+#    #+#              #
-#    Updated: 2024/08/08 20:05:20 by npentini         ###   ########.fr        #
+#    Updated: 2024/08/10 12:13:47 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRCS = push_swap.c push_swap_error.c \
-		push_swap_error_ext.c \
-		push_swap_free.c \
-		push_swap_init.c \
-		push_swap_presort.c \
-		push_swap_stack.c \
-		push_swap_protocols1.c \
-		push_swap_protocols2.c \
-		push_swap_partition_helper.c \
-		push_swap_partition_moves.c \
-		push_swap_partition_conditions.c \
-		push_swap_partition.c \
-		push_swap_merge_insert_position.c \
-		push_swap_merge_remove_position.c \
-		push_swap_merge_execution.c
+SRCS = src/error/push_swap_error.c \
+		src/error/push_swap_error_ext.c \
+		src/init/push_swap_init.c \
+		src/init/push_swap_presort.c \
+		src/init/push_swap_stack.c \
+		src/protocols/push_swap_protocols_single.c \
+		src/protocols/push_swap_protocols_double.c \
+		src/protocols/push_swap_protocols_execute_print.c \
+		src/partition/push_swap_partition_helper.c \
+		src/partition/push_swap_partition_moves.c \
+		src/partition/push_swap_partition_conditions.c \
+		src/partition/push_swap_partition.c \
+		src/merge/push_swap_merge_insert_position.c \
+		src/merge/push_swap_merge_remove_position.c \
+		src/merge/push_swap_merge_execution.c \
+		src/utils/push_swap_algorithm_utils.c \
+		src/utils/push_swap_free.c \
+		src/utils/push_swap_free_ext.c \
+		src/main/push_swap_algorithm_per_args.c \
+		src/main/push_swap.c
 COMP = cc
 CFLAGS = -Wall -Wextra -Werror
 DELETE = rm -rf

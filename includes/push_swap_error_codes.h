@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 03:00:05 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/08 11:43:20 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/10 11:11:50 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@
 # define EMSG_EPSDUP "Arguments has a duplicate numbers!!!"
 # define EMSG_EPSSRT "Argument is already sorted 😉!"
 
-#define SA 11
-#define SB 12
-#define SS 13
-#define PA 21
-#define PB 22
-#define RA 31
-#define RB 32
-#define RR 33
-#define RRA 41
-#define RRB 42
-#define RRR 43
-
 #define STR_SA "sa"
 #define STR_SB "sb"
 #define STR_SS "ss"
@@ -54,6 +42,6 @@
 #define STR_RRA "rra"
 #define STR_RRB "rrb"
 #define STR_RRR "rrr"
-#define PROTO_COUNT 11
+#define PROCESS_COUNT 7
 
 #endif

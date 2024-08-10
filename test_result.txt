@@ -1,0 +1,74 @@
+3 digits combinations
+BEST    1       line 6
+WORST   2       line 3
+AVERAGE 1
+
+4 digits combinations
+BEST    1       line 23
+WORST   7       line 24
+AVERAGE 3
+
+5 digits combinations
+BEST    1       line 97
+WORST   11      line 120
+AVERAGE 6
+
+6 digits combinations
+BEST    1       line 601
+WORST   17      line 404
+AVERAGE 9
+
+7 digits combinations
+BEST    5       line 267
+WORST   20      line 422
+AVERAGE 13
+
+8 digits combinations
+BEST    7       line 237
+WORST   24      line 133
+AVERAGE 16
+
+9 digits combinations
+BEST    10      line 399
+WORST   29      line 474
+AVERAGE 20
+
+10 digits combinations
+BEST    13      line 266
+WORST   35      line 417
+AVERAGE 24
+
+25 digits combinations
+BEST    74      line 311
+WORST   117     line 241
+AVERAGE 95
+
+50 digits combinations;
+BEST    211     line 398
+WORST   307     line 343
+AVERAGE 247
+
+75 digits combinations
+BEST    360     line 389
+WORST   514     line 321
+AVERAGE 427
+
+100 digits combinations
+BEST    535     line 88
+WORST   716     line 190
+AVERAGE 623
+
+200 digits combinations
+BEST    1408    line 451
+WORST   1823    line 239
+AVERAGE 1592
+
+300 digits combinations
+BEST    3773    line 70
+WORST   4691    line 440
+AVERAGE 4127
+
+500 digits combinations
+BEST    5243    line 47
+WORST   6130    line 421
+AVERAGE 5621
