@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 21:23:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/09 21:10:04 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:53:02 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	*array_dup(int *args, int size)
 int	position_locator(t_ps_hub *data)
 {
 	int	*sorted_args;
-	int	x;
 
 	if (data->arg_count < 3)
 		return (0);
@@ -61,15 +60,6 @@ int	position_locator(t_ps_hub *data)
 	ft_advanced_sort(sorted_args, data->arg_count);
 	data->min = sorted_args[0];
 	data->max = sorted_args[data->arg_count - 1];
-	if (data->arg_count % 2 == 0)
-		data->median = sorted_args[(data->arg_count / 2) - 1];
-	else
-		data->median = sorted_args[data->arg_count / 2];
-	x = 0;
-	while (sorted_args[x] != data->median)
-		x++;
-	data->d_min_mid = x + 1;
-	data->d_mid_max = data->arg_count - data->d_min_mid;
 	free(sorted_args);
 	return (0);
 }

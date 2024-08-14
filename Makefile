@@ -6,31 +6,36 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/27 03:28:58 by npentini          #+#    #+#              #
-#    Updated: 2024/08/10 12:13:47 by npentini         ###   ########.fr        #
+#    Updated: 2024/08/14 18:08:57 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRCS = src/error/push_swap_error.c \
-		src/error/push_swap_error_ext.c \
-		src/init/push_swap_init.c \
-		src/init/push_swap_presort.c \
-		src/init/push_swap_stack.c \
-		src/protocols/push_swap_protocols_single.c \
-		src/protocols/push_swap_protocols_double.c \
-		src/protocols/push_swap_protocols_execute_print.c \
-		src/partition/push_swap_partition_helper.c \
-		src/partition/push_swap_partition_moves.c \
-		src/partition/push_swap_partition_conditions.c \
-		src/partition/push_swap_partition.c \
-		src/merge/push_swap_merge_insert_position.c \
-		src/merge/push_swap_merge_remove_position.c \
-		src/merge/push_swap_merge_execution.c \
-		src/utils/push_swap_algorithm_utils.c \
-		src/utils/push_swap_free.c \
-		src/utils/push_swap_free_ext.c \
-		src/main/push_swap_algorithm_per_args.c \
-		src/main/push_swap.c
+CHECKER = checker
+SRCS = mandatory/error/push_swap_error.c \
+		mandatory/error/push_swap_error_ext.c \
+		mandatory/init/push_swap_init.c \
+		mandatory/init/push_swap_presort.c \
+		mandatory/init/push_swap_stack.c \
+		mandatory/protocols/push_swap_protocols_single.c \
+		mandatory/protocols/push_swap_protocols_double.c \
+		mandatory/protocols/push_swap_protocols_execute_print.c \
+		mandatory/partition/push_swap_partition_helper.c \
+		mandatory/partition/push_swap_partition_moves.c \
+		mandatory/partition/push_swap_partition_conditions.c \
+		mandatory/partition/push_swap_partition.c \
+		mandatory/merge/push_swap_merge_insert_position.c \
+		mandatory/merge/push_swap_merge_remove_position.c \
+		mandatory/merge/push_swap_merge_execution.c \
+		mandatory/utils/push_swap_algorithm_utils.c \
+		mandatory/utils/push_swap_free.c \
+		mandatory/utils/push_swap_free_ext.c \
+		mandatory/main/push_swap_algorithm_per_args.c
+MAIN_SRCS = mandatory/main/push_swap.c
+B_SRCS = bonus/checker.c \
+	bonus/checker_protocols_extraction.c \
+	bonus/checker_protocols_execution_conditions.c \
+	bonus/checker_protocols_execution.c
 COMP = cc
 CFLAGS = -Wall -Wextra -Werror
 DELETE = rm -rf
@@ -40,9 +45,12 @@ LIBFT_NAME = libft.a
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/$(LIBFT_NAME)
 OBJS = $(SRCS:%.c=$(OBJ_PUSH_DIR)/%.o)
+MAIN_OBJS = $(MAIN_SRCS:%.c=$(OBJ_PUSH_DIR)/%.o) \
+	$(OBJS)
+B_OBJS = $(B_SRCS:%.c=$(OBJ_PUSH_DIR)/%.o) \
+	$(SRCS:%.c=$(OBJ_PUSH_DIR)/%.o)
 
-
-all: check_build
+all: check_build_mandatory
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR) -s
@@ -51,8 +59,8 @@ $(OBJ_PUSH_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(COMP) $(CFLAGS) -o $@ -c $< -g
 
-$(NAME) : $(OBJS) $(LIBFT)
-	@$(COMP) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME);
+$(NAME) : $(MAIN_OBJS) $(LIBFT)
+	@$(COMP) $(CFLAGS) $(MAIN_OBJS) $(LIBFT) -o $(NAME) -g
 	@echo "\n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
 	@echo "☑️   🇱🇮🇧🇫🇹	compilation completed!      🆗"
 	@echo "✅  🇱🇮🇧🇫🇹	objects has been generated! 🆗"
@@ -64,13 +72,37 @@ $(NAME) : $(OBJS) $(LIBFT)
 	@echo "✅  🇵🇺🇸🇭_🇸🇼🇦🇵	binary has been generated!  🆗"
 	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"
 
-check_build:
+$(CHECKER): $(B_OBJS) $(LIBFT)
+	@$(COMP) $(CFLAGS) $(B_OBJS) $(LIBFT) -o $(CHECKER);
+
+bonus: check_build_bonus
+	@echo "\n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
+	@echo "☑️   🇱🇮🇧🇫🇹	compilation completed!      🆗"
+	@echo "✅  🇱🇮🇧🇫🇹	objects has been generated! 🆗"
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
+	@echo "☑️   🇨🇭🇪🇨🇰🇪🇷	compilation completed!      🆗"
+	@echo "✅  🇨🇭🇪🇨🇰🇪🇷	objects has been generated! 🆗"
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
+	@echo "☑️   Linking	compilation completed!      🆗"
+	@echo "✅  🇨🇭🇪🇨🇰🇪🇷	binary has been generated!  🆗"
+	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"
+
+check_build_mandatory:
 	@if [ -e $(NAME) ]; then \
 		echo "\n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"; \
 		echo "🚫 🇵🇺🇸🇭_🇸🇼🇦🇵 is already generated, What else do you want? 🚫"; \
 		echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"; \
 		else \
 			$(MAKE) $(NAME) -s; \
+	fi
+
+check_build_bonus:
+	@if [ -e $(CHECKER) ]; then \
+		echo "\n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"; \
+		echo "🚫 🇱🇮🇧🇫🇹 is already generated, What else do you want? 🚫"; \
+		echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"; \
+		else \
+			$(MAKE) $(CHECKER) -s; \
 	fi
 
 clean:
@@ -83,10 +115,11 @@ clean:
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean -s > /dev/null 2>&1
-	@$(DELETE) $(NAME)
+	@$(DELETE) $(NAME) $(CHECKER)
 	@echo "\n〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️"
 	@echo "✅  🇱🇮🇧🇫🇹	library has been deleted. 🚮"
 	@echo "✅  🇵🇺🇸🇭_🇸🇼🇦🇵	binary has been deleted.  🚮"
+	@echo "✅  🇨🇭🇪🇨🇰🇪🇷	binary has been deleted.  🚮"
 	@echo "〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n"
 	
 re: fclean all

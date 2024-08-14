@@ -6,13 +6,13 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 03:12:48 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 03:58:50 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:55:59 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int		ft_issign(int c)
+int	ft_issign(int c)
 {
 	return (c == '-' || c == '+');
 }

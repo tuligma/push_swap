@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 00:31:17 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/09 19:35:28 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:21:31 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int	is_valid_number(char *str)
 		if (result != 0)
 		{
 			free_array(&arg, -1);
-			return (error_print(ERR_OTHR_EL));
+			return (ERR_OTHR_EL);
 		}
 		if (ft_atol(arg[x]) > INT_MAX || ft_atol(arg[x]) < INT_MIN)
 		{
 			free_array(&arg, -1);
-			return (error_print(ERR_INT_LIMIT));
+			return (ERR_INT_LIMIT);
 		}
 	}
 	free_array(&arg, -1);
@@ -86,7 +86,7 @@ int	error_checker(int argc, char *argv[])
 		if (argv[x] == NULL)
 			return (EXIT_FAILURE);
 		if (is_valid_number(argv[x]) != 0)
-			return (1);
+			return (EXIT_FAILURE);
 	}
 	return (0);
 }

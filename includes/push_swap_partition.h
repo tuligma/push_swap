@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:37:54 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/09 21:45:51 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:23:59 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ int			add_to_end_series(t_ps_stack *a,
 				t_ps_stack *x, t_list *current);
 int			swap_head_to_next_series(t_ps_stack *x, t_list *current);
 int			add_to_head_series(t_ps_stack *x, t_list *current);
-int			x_tail_prev_series(t_ps_hub *data, t_ps_stack *a, t_ps_stack *x, t_list *current);
-int			rotate_series(t_ps_hub *data, t_ps_stack *a, t_ps_stack *x, t_list *current);
-int			swap_series(t_ps_hub *data, t_ps_stack *a, t_ps_stack *x, t_list *current);
-int			body_of_separation_ext(t_ps_hub *data, t_ps_stack *x, t_list *current);
+int			x_tail_prev_series(t_ps_hub *data,
+				t_ps_stack *a, t_ps_stack *x, t_list *current);
+int			rotate_series(t_ps_hub *data,
+				t_ps_stack *a, t_ps_stack *x, t_list *current);
+int			swap_series(t_ps_hub *data,
+				t_ps_stack *a, t_ps_stack *x, t_list *current);
+int			body_of_separation_ext(t_ps_hub *data,
+				t_ps_stack *x, t_list *current);
 int			body_of_separation(t_ps_hub *data, t_ps_stack *x, t_list *current);
 int			separation(t_ps_hub *data);
 

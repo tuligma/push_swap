@@ -13,6 +13,7 @@
 		"chrono": "c",
 		"random": "c",
 		"limits": "c",
-		"semaphore": "c"
+		"semaphore": "c",
+		"push_swap_presort.h": "c"
 	}
 }

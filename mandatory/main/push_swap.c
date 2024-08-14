@@ -6,11 +6,16 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 00:43:57 by npentini          #+#    #+#             */
-/*   Updated: 2024/08/10 12:12:45 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:17:27 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+
+void	print_node_int(void *content)
+{
+	ft_printf("node: %d\n", *((int *)content));
+}
 
 int	(**process_init())(t_ps_hub *data)
 {
@@ -38,7 +43,7 @@ int	main(int argc, char *argv[])
 
 	result = error_checker(argc, argv);
 	if (result == 1)
-		return (EXIT_FAILURE);
+		return (error_print(EXIT_FAILURE));
 	else if (result == 2)
 		return (EXIT_SUCCESS);
 	data = init_handler(argc, argv);

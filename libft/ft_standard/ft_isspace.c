@@ -6,13 +6,13 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 03:11:11 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/29 03:59:15 by npentini         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:55:40 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int     ft_isspace(int c)
+int	ft_isspace(int c)
 {
-    return ((c >= 9 && c <= 13) || c == ' ');
+	return ((c >= 9 && c <= 13) || c == ' ');
 }

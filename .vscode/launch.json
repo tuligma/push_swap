@@ -4,8 +4,10 @@
 		"name": "(gdb) Launch",
 		"type": "cppdbg",
 		"request": "launch",
-		"program": "${workspaceFolder}/push_swap",
-		"args": ["3", "4", "1", "2"],
+		// "program": "${workspaceFolder}/push_swap",
+		// "args": ["80", "87", "-84", "-75", "25", "-29", "-86", "15", "-51", "-4", "26", "-43", "-90", "-97", "-38", "-21"],
+		"program": "${workspaceFolder}/checker",
+		"args": ["80", "87", "-84", "-75", "25", "-29", "-86", "15", "-51", "-4", "26", "-43", "-90", "-97", "-38", "-21", "<", "${workspaceFolder}/stdin.txt"],
 		"stopAtEntry": false,
 		"cwd": "${fileDirname}",
 		"environment": [],
@@ -22,7 +24,8 @@
 				"text": "-gdb-set disassembly-flavor intel",
 				"ignoreFailures": true
 			}
-		]
+		],
+		"miDebuggerPath": "/usr/bin/gdb"
 	}
 	]
 }
